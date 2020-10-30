@@ -54,6 +54,26 @@ const createFormGroup = ({
   }
 
   const input = createElement('input', inputAttrs)
+  const value = localStorage.getItem(input.id.substring('field-'.length))
+  console.log(input.id, value)
+  if (value) {
+    input.setAttribute('value', value)
+  } else if (input.id === 'field-heuresortie') {
+    const now = new Date()
+    var hours = now.getHours()
+    var minutes = now.getMinutes()
+    if (hours < 10) {
+      hours = "0" + hours
+    } else {
+      hours = "" + hours
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes
+    } else {
+      minutes = "" + minutes
+    }
+    input.setAttribute('value', hours + ":" + minutes)
+  }
 
   const validityAttrs = {
     className: 'validity',
@@ -142,7 +162,6 @@ export function createForm () {
     .map((field,
       index) => {
       const formGroup = createFormGroup({
-        autofocus: index === 0,
         ...field,
         name: field.key,
       })

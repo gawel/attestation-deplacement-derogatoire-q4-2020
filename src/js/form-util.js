@@ -65,6 +65,8 @@ export function getProfile (formInputs) {
     if (field.id === 'field-datesortie') {
       const dateSortie = field.value.split('-')
       value = `${dateSortie[2]}/${dateSortie[1]}/${dateSortie[0]}`
+    } else if (field.id.search('ox-') === -1 && field.id.search('sortie') === -1) {
+      localStorage.setItem(field.id.substring('field-'.length), value)
     }
     fields[field.id.substring('field-'.length)] = value
   }
