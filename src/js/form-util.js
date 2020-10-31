@@ -135,9 +135,8 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
 
     const creationInstant = new Date()
     const creationDate = creationInstant.toLocaleDateString('fr-CA')
-    const creationHour = creationInstant
-      .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-      .replace(':', '-')
+    const profileData = getProfile(formInputs)
+    const creationHour = profileData.heuresortie.replace(':', '-')
 
     downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
 

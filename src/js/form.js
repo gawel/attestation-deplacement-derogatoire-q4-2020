@@ -115,6 +115,14 @@ const createReasonField = (reasonData) => {
   }
   const inputReason = createElement('input', inputReasonAttrs)
 
+  if (document.location.href.match("reason=" + reasonData.code)) {
+    inputReason.setAttribute('checked', true)
+    setTimeout(function() {
+      document.getElementById('generate-btn').click()
+    }, 1000)
+  }
+  reasonData.label = "<b>[" + reasonData.code + "]</b> " + reasonData.label
+
   const labelAttrs = { innerHTML: reasonData.label, className: 'form-checkbox-label', for: id }
   const label = createElement('label', labelAttrs)
 
